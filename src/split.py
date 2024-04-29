@@ -3,9 +3,10 @@ import os
 import shutil
 import heapq
 
-def distribute_files(source_dir, target_dir, num_dirs):
+def distribute_files(source_dir, target_dir, num_dirs,suffix=['.json','.jsonl']):
     # 获取源目录中的所有json和jsonl文件
-    files = [f for f in os.listdir(source_dir) if f.endswith('.json') or f.endswith('.jsonl')]
+    suffix = tuple(suffix)
+    files = [f for f in os.listdir(source_dir) if f.endswith(suffix)]
     file_sizes = {f: os.path.getsize(os.path.join(source_dir, f)) for f in files}
 
     # 创建目标目录
@@ -43,6 +44,7 @@ def main():
     parser.add_argument('--source_dir', type=str, help='The source directory.')
     parser.add_argument('--target_dir', type=str, help='The target directory.')
     parser.add_argument('--num_dirs', type=int, help='The number of target directories.')
+    parser.add_argument('--suffix', type=str,nargs="+", help='The suffix of files to distribute.', default=['.json','.jsonl'])
     
     # 解析命令行参数
     args = parser.parse_args()
