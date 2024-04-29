@@ -50,7 +50,7 @@ def main():
     args = parser.parse_args()
     
     # 调用distribute_files函数
-    distribute_files(args.source_dir, args.target_dir, args.num_dirs)
+    distribute_files(args.source_dir, args.target_dir, args.num_dirs,args.suffix)
 
 if __name__ == '__main__':
     main()
